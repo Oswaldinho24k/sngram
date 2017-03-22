@@ -21,11 +21,13 @@ from django.views.static import serve
 from django.contrib import admin
 from django.views.generic import TemplateView
 from posts import urls as postUrls
+from accounts import urls as accUrls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='home.html')), 
-    url(r'^posts/', include(postUrls, namespace='posts')), 
+    #url(r'^$', TemplateView.as_view(template_name='home.html')), 
+    url(r'^', include(postUrls, namespace='posts')), 
+    url(r'^accounts/', include(accUrls, namespace="accounts")),
 
     #url to upload media
 	url(

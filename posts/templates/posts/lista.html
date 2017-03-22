@@ -13,7 +13,15 @@
 			<div class="well well-sm" style="width:500px; margin:0 auto;">
 			  <div class="row" >
 			  	<div class="col-md-2">
-			  		<img id="img" class="img-circle" style="width:50px;" src="https://scontent.fmex6-1.fna.fbcdn.net/v/t1.0-9/16195031_1401148219896672_1646832744494442920_n.jpg?oh=fe12ae66d23f3f45f7011da17a66ed75&oe=595857CB">
+			  		{%if post.autor.profile.img.url%}
+
+			  		<img id="img" class="img-circle" style="width:50px;" src="/media/{{post.autor.profile.img.url}}">
+			  		{%else%}
+			  		<img id="img" class="img-circle" style="width:50px;" src="" alt="autor">
+
+			  		{%endif%}
+			  	
+			  		
 			  		
 			  	</div>
 			  	<div class="col-md-7">

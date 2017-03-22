@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<section class="contenedor centrado">
+	<h1 align="center">Inicia sesión</h1>
+
+<article class="panel panel-default row">
+<form class="panel-body" action="{%url 'accounts:login'%}" method="post">
+	{%csrf_token%}
+	<div class="col-md-4 col-md-offset-4">
+	{{form.as_p}}
+	
+	<input type="hidden" name="next" value="{{next}}"> 
+	<input class="success btn btn-primary" type="submit" value="Iniciar Sesión">
+	</div>
+</form>
+
+<h6 align="center">
+	¿No tienes cuenta?, registrate <a href="{%url 'accounts:registro'%}">aqui</a>
+</h6>
+</article>
+
+</section>
+
+
+<script>
+	$('input').addClass('form-control')
+</script>
+{%endblock content%}

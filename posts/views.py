@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 #create the list view of the Posts
+
 class ListView(View):
+	@method_decorator(login_required)
 	def get(self, request):
 		posts = Post.objects.all().order_by('-date')
 		template_name = "posts/lista.html"
@@ -20,8 +22,8 @@ class ListView(View):
 
 		return render(request, template_name, context)
 
-class DetailView(View):
-	def get(self, request):
+#class DetailView(View):
+#	def get(self, request):
 		
 
 #creating the form view fo a new post

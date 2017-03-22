@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{%block content%}
+<style type="text/css">
+	.fileUpload {
+	    position: relative;
+	    overflow: hidden;
+	    margin: 10px;
+	}
+	.fileUpload input.upload {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    margin: 0;
+	    padding: 0;
+	    font-size: 20px;
+	    cursor: pointer;
+	    opacity: 0;
+	    filter: alpha(opacity=0);
+	}
+
+	#image{
+		width: 200px;
+		height: 200px;
+	}
+
+</style>
+	
+	<h1>{{request.user.username}}</h1>
+
+		{%if request.user.profile.img%}
+        <img class="thumbnail" id="image" src="/media/{{request.user.profile.img.url}}">
+        {%else%}
+        <img class="thumbnail" id="image" src="" alt="la pic">
+        {%endif%}
+			
+			<!--<a href="{%url 'accounts:logout'%}">
+			<button>Cerrar tu sesión</button>
+			</a>-->
+		<form action="." method="post" enctype='multipart/form-data'>
+			{%csrf_token%}
+			
+			<div class="fileUpload btn btn-primary">
+				<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+	    		<input id="files" class="upload" type="file" name="img">
+			</div>
+			<input type="submit" value="Guardar">
+		</form>
+    
+      
+        
+      
+ 
+
+{%endblock content%}
