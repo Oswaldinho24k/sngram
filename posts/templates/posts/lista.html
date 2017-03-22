@@ -7,23 +7,29 @@
 		#img{
 			margin-bottom: 10px;
 		}
+		#def{
+			font-size: 4rem;
+    		color: black;
+		}
 	</style>
 	<div class="container">
 		{%for post in posts%}
 			<div class="well well-sm" style="width:500px; margin:0 auto;">
 			  <div class="row" >
-			  	<div class="col-md-2">
-			  		{%if post.autor.profile.img.url%}
+			  	<a href="{%url 'accounts:profile'%}">
+				  	<div class="col-md-2">
+				  		{%if post.autor.profile.img.url%}
 
-			  		<img id="img" class="img-circle" style="width:50px;" src="/media/{{post.autor.profile.img.url}}">
-			  		{%else%}
-			  		<img id="img" class="img-circle" style="width:50px;" src="" alt="autor">
+				  		<img id="img" class="img-circle" style="width:50px; height:50px;" src="/media/{{post.autor.profile.img.url}}">
+				  		{%else%}
+				  		<span class="glyphicon glyphicon-user" id="def" aria-hidden="true"></span>
 
-			  		{%endif%}
-			  	
-			  		
-			  		
-			  	</div>
+				  		{%endif%}
+				  	
+				  		
+				  		
+				  	</div>
+			  	</a>
 			  	<div class="col-md-7">
 			  		<h3 id="header">{{post.autor}}</h3>
 			  		

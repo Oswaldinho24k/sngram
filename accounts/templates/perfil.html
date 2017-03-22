@@ -22,30 +22,69 @@
 		width: 200px;
 		height: 200px;
 	}
+	#def{
+		font-size: 15rem;
+		color: black;
+	}
+	#postimg{
+		width: 60%;
+	}
 
 </style>
 	
-	<h1>{{request.user.username}}</h1>
-
-		{%if request.user.profile.img%}
-        <img class="thumbnail" id="image" src="/media/{{request.user.profile.img.url}}">
-        {%else%}
-        <img class="thumbnail" id="image" src="" alt="la pic">
-        {%endif%}
-			
-			<!--<a href="{%url 'accounts:logout'%}">
-			<button>Cerrar tu sesión</button>
-			</a>-->
-		<form action="." method="post" enctype='multipart/form-data'>
-			{%csrf_token%}
-			
-			<div class="fileUpload btn btn-primary">
-				<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
-	    		<input id="files" class="upload" type="file" name="img">
-			</div>
-			<input type="submit" value="Guardar">
-		</form>
+	<section class="container">
+		
     
+    
+    	
+    	<div class="row">
+    		<div class="col-md-4">
+    			<div style="position:fixed;">
+    				<h1>{{request.user.username}}</h1>
+
+					{%if request.user.profile.img%}
+			        <img class="thumbnail" id="image" src="/media/{{request.user.profile.img.url}}">
+			        {%else%}
+			        <span class="glyphicon glyphicon-user" id="def" aria-hidden="true"></span>
+			        {%endif%}
+						
+						<!--<a href="{%url 'accounts:logout'%}">
+						<button>Cerrar tu sesión</button>
+						</a>-->
+					<form action="." method="post" enctype='multipart/form-data'>
+						{%csrf_token%}
+						
+						<div class="fileUpload btn btn-primary">
+							<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+				    		<input id="files" class="upload" type="file" name="img">
+						</div>
+						<input type="submit" value="Guardar">
+					</form>
+    			</div>
+    		</div>
+    		<div class="col-md-8">
+    			<article>
+    				<h2>Ma posts</h2>
+		    		{%for post in posts%}
+			    		<div class="thumbnail">
+			    			<h5>{{post.autor}}</h5>
+			    			<h3>{{post.nombre}}</h3>
+				    		<p>{{post.texto}}</p>
+				    		
+				    		{%if post.img%}
+				    		<img src="/media/{{post.img.url}}" id="postimg">
+				    		{%endif%}
+				    		{%empty%}
+				    		<h4>No tienes posts bro!</h4>
+				    		<a href="/nuevo" class="btn btn-primary">Tell us something!</a>
+			    		</div>
+		    		{%endfor%}
+		    	</article>
+    		</div>
+    	</div>
+
+    
+	</section>
       
         
       

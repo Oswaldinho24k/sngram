@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import Profile
+from posts.models import Post
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -10,9 +11,11 @@ class ProfileView(View):
 	@method_decorator(login_required)
 	def get(self, request):
 		template_name="perfil.html"
+		posts = Post.objects.all().filter(autor=request.user).order_by('-date')
 		profileform = ProfileEditForm(instance=request.user.profile)
 		context = {
 		'profileform':profileform,
+		'posts':posts
 		}
 		return render(request,template_name,context)
 
