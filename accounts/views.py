@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from .models import Profile
 from posts.models import Post
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 from .forms import UserRegistrationForm, ProfileEditForm
 
@@ -59,4 +61,37 @@ class RegistrationView(View):
 			'form':new_user_form
 			}
 			return render(request,template_name,context)
+
+
+class UserListView(View):
+	def get(self, request):
+		query = request.GET.get("q")
+		if query:
+			users = User.objects.all().filter(
+				Q(username__icontains=query) | 
+				Q(first_name__icontains=query) |
+				Q(email__icontains=query))
+		else:
+			users = User.objects.none()
+
+		template_name='users/list.html'
+
+		context = {
+		'users':users
+		}
+
+		return render(request, template_name, context)
+
+class UserDetailView(View):
+	def get(self, request, id):
+		user = get_object_or_404(User, id=id)
+
+		template_name = 'users/detalle.html'
+
+		context = {
+		'user':user
+		}
+		return render(request, template_name, context)
+
+
 

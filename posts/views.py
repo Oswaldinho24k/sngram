@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import Post
+from django.db.models import Q
 #to fill the forms 
 from .forms import PostForm
 from django.utils.text import slugify
@@ -13,6 +14,14 @@ from django.utils.decorators import method_decorator
 class ListView(View):
 	@method_decorator(login_required)
 	def get(self, request):
+				#to make a filter#
+		#query = request.GET.get("q")
+		#if query:
+		#	posts = Post.objects.all().filter(
+		#		Q(autor__username__icontains=query) | 
+		#		Q(nombre__icontains=query)
+		#		)
+		#else:
 		posts = Post.objects.all().order_by('-date')
 		template_name = "posts/lista.html"
 

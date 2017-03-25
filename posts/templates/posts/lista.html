@@ -23,11 +23,7 @@
 				  		<img id="img" class="img-circle" style="width:50px; height:50px;" src="/media/{{post.autor.profile.img.url}}">
 				  		{%else%}
 				  		<span class="glyphicon glyphicon-user" id="def" aria-hidden="true"></span>
-
-				  		{%endif%}
-				  	
-				  		
-				  		
+				  		{%endif%}				  		
 				  	</div>
 			  	</a>
 			  	<div class="col-md-7">
@@ -45,6 +41,8 @@
 			  <p>{{post.texto}}</p>
 			</div>
 			<br>
+		{%empty%}
+			<h3>No hay Posts bro! :(</h3>
 		{%endfor%}
 	</div>
 {%endblock content%}
