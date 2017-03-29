@@ -1,4 +1,45 @@
 {%extends 'base.html'%}
 {%block content%}
-<h2>Perfil de {{user.username}}</h2>
+
+<div class="well">
+	<h2 align="center">Perfil de {{user.username}}</h2>
+	<div class="row">
+		<div class="col-md-4">
+
+			{%if user.img%}
+		  	<img class="img-responsive" src="/media/{{user.profile.img.url}}" width="500px">
+		  	{%else%}
+			<span class="glyphicon glyphicon-user" id="def" aria-hidden="true"></span>
+			{%endif%}
+			<h3>{{user.username}}</h3>
+			<h4>{{user.first_name}}</h4>
+			<h4>{{user.last_name}}</h4>
+			<h4>{{user.email}}</h4>
+
+		</div>
+		
+		<div class="col-md-8">
+			<div class="row">
+
+				{%for p in posts%}
+				<div class="col-md-3">
+					  {%if p.img%}
+					  <a class="thumbnail">
+					  	<img class="img-responsive" src="/media/{{p.img}}">
+					  </a>
+					  	
+					  {%endif%}
+					  <h4>{{p.nombre}}</h4>
+					  <p>{{p.texto}}</p>
+				</div>
+			{%empty%}
+				<h3>Este man ni publica</h3>
+			{%endfor%}
+			</div>
+		</div>
+		
+	</div>
+  
+</div>
+
 {%endblock content%}

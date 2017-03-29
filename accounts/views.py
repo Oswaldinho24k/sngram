@@ -75,6 +75,7 @@ class UserListView(View):
 			users = User.objects.none()
 
 		template_name='users/list.html'
+		
 
 		context = {
 		'users':users
@@ -85,11 +86,13 @@ class UserListView(View):
 class UserDetailView(View):
 	def get(self, request, id):
 		user = get_object_or_404(User, id=id)
+		posts = Post.objects.all().filter(autor=user.id)
 
 		template_name = 'users/detalle.html'
 
 		context = {
-		'user':user
+		'user':user, 
+		'posts':posts
 		}
 		return render(request, template_name, context)
 

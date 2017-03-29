@@ -66,13 +66,14 @@
     			<article>
     				<h2>Ma posts</h2>
 		    		{%for post in posts%}
-			    		<div class="thumbnail">
+			    		<div class="panel">
 			    			<h5>{{post.autor}}</h5>
 			    			<h3>{{post.nombre}}</h3>
 				    		<p>{{post.texto}}</p>
 				    		
 				    		{%if post.img%}
 				    		<img src="/media/{{post.img.url}}" id="postimg">
+				    		<hr>
 				    		{%endif%}
 				    		{%empty%}
 				    		<h4>No tienes posts bro!</h4>
